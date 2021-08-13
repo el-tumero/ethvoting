@@ -3,13 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@polyjuice-provider/ethers": "0.0.1-rc7",
+    "@polyjuice-provider/web3": "0.0.1-rc7",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "bootstrap": "^5.0.2",
+    "nervos-godwoken-integration": "0.0.6",
     "react": "^17.0.2",
+    "react-bootstrap": "^2.0.0-beta.4",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "web3": "^1.5.1"
   },
   "scripts": {
     "start": "react-scripts start",
