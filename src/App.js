@@ -165,7 +165,7 @@ if(loading === false){
         </Row>
         <Row>
         <Col></Col>
-        <Col><h6 className="info">Rinkeby Testnet version</h6></Col>
+        <Col><h6 className="info">Rinkeby Testnet version, app made by el-tumero</h6></Col>
         <Col></Col>
         </Row>
         <Row>
