@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/ethvoting/static/css/main.4999da3e.chunk.css",
-    "main.js": "/ethvoting/static/js/main.3562cbc6.chunk.js",
-    "main.js.map": "/ethvoting/static/js/main.3562cbc6.chunk.js.map",
+    "main.js": "/ethvoting/static/js/main.0c0af310.chunk.js",
+    "main.js.map": "/ethvoting/static/js/main.0c0af310.chunk.js.map",
     "runtime-main.js": "/ethvoting/static/js/runtime-main.0b54c9c3.js",
     "runtime-main.js.map": "/ethvoting/static/js/runtime-main.0b54c9c3.js.map",
     "static/css/2.da1eef19.chunk.css": "/ethvoting/static/css/2.da1eef19.chunk.css",
-    "static/js/2.85791399.chunk.js": "/ethvoting/static/js/2.85791399.chunk.js",
-    "static/js/2.85791399.chunk.js.map": "/ethvoting/static/js/2.85791399.chunk.js.map",
+    "static/js/2.c4d428df.chunk.js": "/ethvoting/static/js/2.c4d428df.chunk.js",
+    "static/js/2.c4d428df.chunk.js.map": "/ethvoting/static/js/2.c4d428df.chunk.js.map",
     "static/js/3.8727dcc9.chunk.js": "/ethvoting/static/js/3.8727dcc9.chunk.js",
     "static/js/3.8727dcc9.chunk.js.map": "/ethvoting/static/js/3.8727dcc9.chunk.js.map",
     "index.html": "/ethvoting/index.html",
     "static/css/2.da1eef19.chunk.css.map": "/ethvoting/static/css/2.da1eef19.chunk.css.map",
     "static/css/main.4999da3e.chunk.css.map": "/ethvoting/static/css/main.4999da3e.chunk.css.map",
-    "static/js/2.85791399.chunk.js.LICENSE.txt": "/ethvoting/static/js/2.85791399.chunk.js.LICENSE.txt"
+    "static/js/2.c4d428df.chunk.js.LICENSE.txt": "/ethvoting/static/js/2.c4d428df.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.0b54c9c3.js",
     "static/css/2.da1eef19.chunk.css",
-    "static/js/2.85791399.chunk.js",
+    "static/js/2.c4d428df.chunk.js",
     "static/css/main.4999da3e.chunk.css",
-    "static/js/main.3562cbc6.chunk.js"
+    "static/js/main.0c0af310.chunk.js"
   ]
 }
