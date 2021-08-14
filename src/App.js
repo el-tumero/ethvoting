@@ -2,23 +2,14 @@ import { Container, Row, Col, InputGroup, Button, FormControl, Spinner, Alert } 
 import './style.css'
 import React, {useEffect, useState } from 'react';
 import Web3 from 'web3';
-import { PolyjuiceHttpProvider } from '@polyjuice-provider/web3';
-import { CONFIG } from './config'
-import { AddressTranslator } from './nervos-godwoken-integration';
 import Voting from './build/contracts/Voting.json'
 
 async function createWeb3() {
   // Modern dapp browsers...
   if (window.ethereum) {
-      const godwokenRpcUrl = CONFIG.WEB3_PROVIDER_URL;
-      const providerConfig = {
-          rollupTypeHash: CONFIG.ROLLUP_TYPE_HASH,
-          ethAccountLockCodeHash: CONFIG.ETH_ACCOUNT_LOCK_CODE_HASH,
-          web3Url: godwokenRpcUrl
-      };
-
-      const provider = new PolyjuiceHttpProvider(godwokenRpcUrl, providerConfig);
-      const web3 = new Web3(provider || Web3.givenProvider);
+      const web3 = new Web3(
+        window.ethereum
+      );
 
       try {
           // Request account access if needed
@@ -37,8 +28,7 @@ function App() {
 
   const [web3, setWeb3] = useState();
   const [accounts, setAccounts] = useState();
-  const [l2Balance, setL2Balance] = useState();
-  const [polyjuiceAddress, setPolyjuiceAddress] = useState();
+  const [balance, setBalance] = useState();
   const [votingContract, setContract ] = useState();
   const [candidate, setCandidate] = useState();
   const [candidates, setCandidates ] = useState();
@@ -46,14 +36,6 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    if (accounts?.[0]) {
-        const addressTranslator = new AddressTranslator();
-        setPolyjuiceAddress(addressTranslator.ethAddressToGodwokenShortAddress(accounts?.[0]));
-    } else {
-        setPolyjuiceAddress(undefined);
-    }
-  }, [accounts]);
 
   useEffect(() => {
     if (web3) {
@@ -67,17 +49,25 @@ function App() {
         setAccounts(_accounts);
   
         if (_accounts && _accounts[0]) {
-            const _l2Balance = await _web3.eth.getBalance(_accounts[0]);
-            setL2Balance(_l2Balance);
+            const _balance = await _web3.eth.getBalance(_accounts[0]);
+            setBalance(_balance);
         }
     })();
   },[web3]);
 
   useEffect(() => {
-    if(web3){
-      const contract = new web3.eth.Contract(Voting.abi, CONFIG.CONTRACT_ADDRESS);
-      setContract(contract);
-    }
+    if(web3) initContract();
+      async function initContract(){
+        const networkId = await web3.eth.net.getId();
+        const contractNetwork = Voting.networks[networkId]
+        if(contractNetwork){
+          const contract = new web3.eth.Contract(Voting.abi, contractNetwork.address);
+          setContract(contract);
+        }
+        else{
+          window.alert('Token contract not deployed to detected network. Use Rinkeby Testnet instead!')
+        } 
+      }
   }, [web3]);
 
   useEffect(() => {
@@ -107,7 +97,6 @@ function App() {
     setDisable(true);
     setShow(true);
     const result = await votingContract.methods.vote(e.target.value).send({
-      ...CONFIG.DEFAULT_SEND_OPTIONS,
       from: accounts[0],
     })
 
@@ -117,16 +106,17 @@ function App() {
 
   }
 
+
   async function addCandidate(e) {
     setDisable(true);
     e.preventDefault();
     setShow(true);
-    const result = await votingContract.methods.addCandidate(candidate).send({
-      ...CONFIG.DEFAULT_SEND_OPTIONS,
-      from: accounts[0],
-    });
 
-    window.location.reload();
+    const result = await votingContract.methods.addCandidate(candidate).send({
+      from: accounts[0],
+    })
+
+    window.location.reload()
 
     console.log(result)
   }
@@ -155,7 +145,7 @@ function App() {
       return (
         <Alert variant="warning" onClose={() => setShow(false)} dismissible>
           <Alert.Heading>Transaction in progress...</Alert.Heading>
-          <p>This may take up to 2 minutes! Press F12 (devtools) and open console for details!</p><Spinner animation="border" size="sm" />
+          <p>This may take a while!</p><Spinner animation="border" size="sm" />
         </Alert>
       )
     }
@@ -170,7 +160,12 @@ if(loading === false){
       <Container className='content'>
         <Row>
         <Col></Col>
-        <Col><h1>Polyjuice Voting Dapp</h1></Col>
+        <Col><h1>ETH Voting Dapp</h1></Col>
+        <Col></Col>
+        </Row>
+        <Row>
+        <Col></Col>
+        <Col><h6 className="info">Rinkeby Testnet version</h6></Col>
         <Col></Col>
         </Row>
         <Row>
@@ -180,12 +175,7 @@ if(loading === false){
         </Row>
         <Row>
         <Col></Col>
-        <Col><h5>Your Polyjuice address: {polyjuiceAddress}</h5></Col>
-        <Col></Col>
-        </Row>
-        <Row>
-        <Col></Col>
-        <Col><h6>Your Layer 2 funds: {l2Balance/100000000} CKB</h6></Col>
+        <Col><h6>Your ETH funds: {balance/1000000000000000000} ETH</h6></Col>
         <Col></Col>
         </Row>
         <Row>

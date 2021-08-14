@@ -19,8 +19,10 @@
  */
 
 //
-// const fs = require('fs');
-// const mnemonic = fs.readFileSync(".secret").toString().trim();
+const fs = require('fs');
+const mnemonic = fs.readFileSync(".secret").toString().trim();
+
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 module.exports = {
   /**
@@ -32,22 +34,20 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
-  // contracts_build_directory: "./src/build/contracts",
-  // networks: {
-  //   development: {
-  //    host: "127.0.0.1",     // Localhost (default: none)
-  //    port: 7545,            // Standard Ethereum port (default: none)
-  //    network_id: "*",       // Any network (default: none)
-  //   },
-  //   bscTestnet: {
-  //     provider: () => new HDWalletProvider(
-  //       privateKeys,
-  //       'https://data-seed-prebsc-1-s1.binance.org:8545/'
-  //     ),
-  //     network_id: 97,
-  //     skipDryRun: true
-  //   }
-  // },
+  contracts_build_directory: "./src/build/contracts",
+  networks: {
+    development: {
+     host: "127.0.0.1",     // Localhost (default: none)
+     port: 7545,            // Standard Ethereum port (default: none)
+     network_id: "*",       // Any network (default: none)
+    },
+    rinkeby: {
+      provider: function() {
+        return new HDWalletProvider(mnemonic, "<YOUR INFURA URL>")
+      },
+      network_id: 4
+    }
+  },
 
   // Set default mocha options here, use special reporters etc.
   mocha: {

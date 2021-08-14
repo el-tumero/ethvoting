@@ -1,13 +1,12 @@
 {
-  "name": "nervosdapp",
+  "name": "ethvotingdapp",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@polyjuice-provider/ethers": "0.0.1-rc7",
-    "@polyjuice-provider/web3": "0.0.1-rc7",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "@truffle/hdwallet-provider": "^1.4.3",
     "bootstrap": "^5.0.2",
     "nervos-godwoken-integration": "0.0.6",
     "react": "^17.0.2",
