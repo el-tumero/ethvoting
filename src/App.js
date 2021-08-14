@@ -170,6 +170,11 @@ if(loading === false){
         </Row>
         <Row>
         <Col></Col>
+        <Col><p>Github repo: <a href="https://github.com/el-tumero/ethvoting">https://github.com/el-tumero/ethvoting</a></p></Col>
+        <Col></Col>
+        </Row>
+        <Row>
+        <Col></Col>
         <Col><h5>Your ETH address: {accounts?.[0]}</h5></Col>
         <Col></Col>
         </Row>
